@@ -1,10 +1,11 @@
 import docker
 import os
 import sys
+import List
 
 
 def main():
-    print("Hello from service-builder!")
+    input_arguments: List[str] = sys.argv[1:]
 
 
 if __name__ == "__main__":
