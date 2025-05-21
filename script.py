@@ -1,11 +1,13 @@
 import docker
 import os
 import sys
-import List
+
+
+def build_image(service_folder: str) -> None:
 
 
 def main():
-    input_arguments: List[str] = sys.argv[1:]
+    input_arguments: list[str] = sys.argv[1:]
 
 
 if __name__ == "__main__":
