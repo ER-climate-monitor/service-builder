@@ -15,7 +15,7 @@ def find_dockerfile(path: str) -> str | None:
     return None
 
 
-def build_image(service_folder: str, service_name: str) -> None:
+def build_image(service_folder: str, service_name: str, port: str) -> None:
     print(f"[LOGGER]: Input service folder: {service_folder}")
     dockerfile_path: str = find_dockerfile(service_folder)
     print(f"[LOGGER]: Dockerfile path: {dockerfile_path}")
@@ -23,15 +23,15 @@ def build_image(service_folder: str, service_name: str) -> None:
         formatted_tag: str = DOCKER_TAG_FORMAT.format(service_name)
         docker.build(
             context_path=service_folder, file=dockerfile_path, tags=[formatted_tag], push=True, platforms=["linux/amd64"])
-        deploy_service(formatted_tag, service_name)
+        deploy_service(formatted_tag, service_name, port)
 
     return
 
 
-def deploy_service(docker_tag: str, service_name: str) -> None:
+def deploy_service(docker_tag: str, service_name: str, port: str) -> None:
     # deploy
-    deploy_command: str = "gcloud run deploy {} --image {} --project er-climate-monitor --region europe-west8 --allow-unauthenticated".format(
-        service_name, docker_tag)
+    deploy_command: str = "gcloud run deploy {} --image {} --project er-climate-monitor --region europe-west8 --allow-unauthenticated --port {}".format(
+        service_name, docker_tag, port)
     run(deploy_command.split(' '))
     create_env(service_name)
 
@@ -48,8 +48,8 @@ def create_env(service_name: str) -> None:
 
 def main():
     input_arguments: list[str] = sys.argv[1:]
-    if len(input_arguments) > 1:
-        build_image(input_arguments[0], input_arguments[1])
+    if len(input_arguments) > 2:
+        build_image(input_arguments[0], input_arguments[1], input_arguments[2])
 
 
 if __name__ == "__main__":
