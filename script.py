@@ -1,7 +1,7 @@
 import os
 import sys
 from python_on_whales import docker, Image
-import subprocess
+from subprocess import CompletedProcess, run
 
 DOCKER_TAG_FORMAT: str = "europe-west8-docker.pkg.dev/er-climate-monitor/quickstart-docker-repo/{}"
 GCP_URL = "https://run.googleapis.com/v2/projects/e-climate-monitor/locations/europe-west8/services?serviceId={}"
@@ -30,7 +30,18 @@ def deploy_service(docker_tag: str, service_name: str) -> None:
     # deploy
     deploy_command: str = "gcloud run deploy {} --image {} --project er-climate-monitor --region europe-west8 --allow-unauthenticated".format(
         service_name, docker_tag)
-    subprocess.run(deploy_command.split(' '))
+    run(deploy_command.split(' '))
+    create_env(service_name)
+
+
+def create_env(service_name: str) -> None:
+    url_command: str = "gcloud run services describe {} --project er-climate-monitor --region europe-west8 --format=value(status.url)" .format(
+        service_name)
+    output: CompletedProcess = run(url_command.split(' '), capture_output=True)
+    deployed_url: str = output.stdout.decode("utf-8")
+    with open('.env', 'a') as f:
+        f.write("{}={}\n".format(
+            service_name.upper().replace('-', '_'), deployed_url))
 
 
 def main():
