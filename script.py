@@ -16,7 +16,9 @@ def find_dockerfile(path: str) -> str | None:
 
 
 def build_image(service_folder: str, service_name: str) -> None:
+    print(f"[LOGGER]: Input service folder: {service_folder}")
     dockerfile_path: str = find_dockerfile(service_folder)
+    print(f"[LOGGER]: Dockerfile path: {dockerfile_path}")
     if dockerfile_path:
         formatted_tag: str = DOCKER_TAG_FORMAT.format(service_name)
         docker.build(
