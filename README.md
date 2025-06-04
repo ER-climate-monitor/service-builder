@@ -1,6 +1,6 @@
 # Service Builder
 
-This repository contains a software that automatically helps deploy a dockerize application to Google Cloud Run service. This application is developed using Python3, [uv](https://docs.astral.sh/uv/) and the [Google Cloud CLI](https://cloud.google.com/cli?hl=en). So before everything install Python3 ([instructions](https://www.python.org/downloads/)), uv ([instructions](https://docs.astral.sh/uv/getting-started/installation/)) and the Google Cloud CLI [instructions](https://cloud.google.com/cli?hl=en).
+This repository contains a software that automatically helps deploy a dockerize application to Google Cloud Run service. This application is developed using Python3, [uv](https://docs.astral.sh/uv/) and the [Google Cloud CLI](https://cloud.google.com/cli?hl=en). So before everything install Python3 ([instructions](https://www.youtube.com/watch?v=tp9b7RuIToU)), uv ([instructions](https://docs.astral.sh/uv/getting-started/installation/)) and the Google Cloud CLI [instructions](https://cloud.google.com/cli?hl=en).
 
 After cloning this repository, you need to install all the dependencies required from this Python script. In order to achieve this goal, you follow our instructions and use:
 1. uv (reccommended)
@@ -61,7 +61,7 @@ Everything is now ready to run, use the command:
 python3 run script.py /path/to/the/folder/containing/the/dockerfile name-of-the-serice 8080
 ```
 ## Build and push your image
-By default this script works on the *er-climate-monitor* project (on Google Cloud), so you will need to change that if you have a different name.
+By default this script works on the *er-climate-monitor* project (on Google Cloud), so you will need to change that if you have a different name (see here how to create a project on GCP [instructions](https://cloud.google.com/gcp?utm_source=google&utm_medium=cpc&utm_campaign=emea-it-all-en-bkws-all-all-trial-b-gcp-1707574&utm_content=text-ad-none-any-DEV_c-CRE_671802840909-ADGP_Hybrid+%7C+BKWS+-+BRO+%7C+Txt+-+GCP+-+General+-+v2-KWID_43700077734444396-kwd-14471151-userloc_1008325&utm_term=KW_gcp-NET_g-PLAC_&&gclsrc=aw.ds&gad_source=1&gad_campaignid=20502083204&gclid=CjwKCAjw3f_BBhAPEiwAaA3K5MUPJHhZaqrzKniSBzi9Q6I4-um2GVtx7YNTDwvliTuC2ikwZmFEjhoC_qQQAvD_BwE&hl=en)).
 
 The deployment can require some minutes, because:
 1. The script builds the Docker image;
