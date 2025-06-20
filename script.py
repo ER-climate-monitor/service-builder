@@ -43,7 +43,7 @@ def create_env(service_name: str) -> None:
     deployed_url: str = output.stdout.decode("utf-8")
     with open('.env', 'a') as f:
         f.write("{}={}\n".format(
-            service_name.upper().replace('-', '_'), deployed_url))
+            service_name.upper().replace('-', '~'), deployed_url))
 
 
 def main():
